@@ -11,8 +11,13 @@ try {
         mwg.add(line)
     })
     mwg.makeImmutable();
-    let test = ['c','a','t'];
-    console.log(mwg.lookup('cta'))
+    
+    console.log((mwg.startsWith('wu')).map((element)=>{
+        if(element.length > 2) 
+            return element[2]
+    }).filter((value,index,self)=>{
+        return self.indexOf(value) === index
+    }))
     // console.log(mwg.containsAll(["c","a","t"]));
 } catch(err){
     console.error(err);
