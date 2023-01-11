@@ -16,19 +16,14 @@ function main() {
         console.error(err);
     }
 
-    checkWords("xyzmze", "a", mwg)
+    checkWords("xyzemnze", "", mwg)
 }
 
 function checkWords(scrabble, word, dictionary){
     if(dictionary.lookup(word))
         console.log(word);
     
-    const availableNext = dictionary.startsWith(word).map((element)=>{
-        return element[word.length]
-    }).filter((value,index,self)=>{
-        if(value != undefined)
-            return self.indexOf(value) === index
-    }).sort()
+    const availableNext = checkNext(word,dictionary)
     const nextLetter = scrabble.split('').filter((value)=>{
         return availableNext.includes(value);
     }).filter((value,index,self)=>{
@@ -45,6 +40,18 @@ function checkWords(scrabble, word, dictionary){
         // }).join(""), word + element);
     })
     
+}
+
+function checkNext(word, dictionary){
+    if(word === ""){
+        return ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    }
+    return dictionary.startsWith(word).map((element)=>{
+        return element[word.length]
+    }).filter((value,index,self)=>{
+        if(value != undefined)
+            return self.indexOf(value) === index
+    }).sort()
 }
 
 main();
